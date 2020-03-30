@@ -1,0 +1,43 @@
+{
+    "db": { 	
+		"mongo": {
+			"host": "localhost",
+			"port": "27017",
+			"user": "dataengine",
+			"password": "dataengine@2018",
+			"database": "coindcx",
+			"poolSize": 10,
+			"setMaxListeners":5
+		},
+		"redis": {
+			"host": "localhost",
+			"port": "6379",
+			"isEnabled": true,
+			"defaultTTL": 3600
+		}
+    },
+    "stickType":{
+    	"one_minute": 1,
+    	"fifteen_minute": 15,
+    	"one_hour": 60
+    },
+    "expireStickType": {
+    	"one_minute": 15,
+    	"fifteen_minute": 60,
+    	"one_hour": 720
+    },
+	"rabbitMQ":{		
+        "host": "127.0.0.1",
+        "port": "5672",
+        "user": "nodelib",
+        "pass": "nodelib",
+        "vhost": "logs",
+        "debug": false
+	},
+    "coindcxBaseURL": "https://api.coindcx.com",
+    "coindcxTradeURL": "/exchange/ticker",
+    "coindcxMarketDetailsURL": "/exchange/v1/markets_details",
+    "host": "http://localhost",
+    "PORT": 7005
+}
+

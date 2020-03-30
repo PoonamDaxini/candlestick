@@ -1,0 +1,29 @@
+{
+  "name": "candlestick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "chart.js": "^2.9.3",
+    "config": "^3.3.0",
+    "ioredis": "^4.16.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^8.0.8",
+    "koa2-cors": "^2.0.6",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.5",
+    "socket.io-client": "^2.3.0",
+    "superagent": "^5.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
