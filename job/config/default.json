@@ -3,8 +3,8 @@
 		"mongo": {
 			"host": "localhost",
 			"port": "27017",
-			"user": "dataengine",
-			"password": "dataengine@2018",
+			"user": "",
+			"password": "",
 			"database": "coindcx",
 			"poolSize": 10,
 			"setMaxListeners":5
@@ -25,15 +25,7 @@
     	"one_minute": 86400,
     	"fifteen_minute": 86400,
     	"one_hour": 86400
-    },
-	"rabbitMQ":{		
-        "host": "127.0.0.1",
-        "port": "5672",
-        "user": "nodelib",
-        "pass": "nodelib",
-        "vhost": "logs",
-        "debug": false
-	},
+    }
     "coindcxBaseURL": "https://api.coindcx.com",
     "coindcxTradeURL": "/exchange/ticker",
     "coindcxMarketDetailsURL": "/exchange/v1/markets_details",
