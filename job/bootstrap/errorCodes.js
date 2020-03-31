@@ -1,7 +1,7 @@
 class ErrorCodes {
       constructor() {
             this.errorCode = {
-                  85000: 'No record found to update',
+                  001: 'No record found to show',
             };
       }
 
