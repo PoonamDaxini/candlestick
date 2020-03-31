@@ -20,6 +20,7 @@ exports.getMarketDetails = async(ctx) => {
 	ctx.body = await request.get(config.coindcxBaseURL + config.coindcxMarketDetailsURL).then(res => {
 		return res.body;
 	}).catch(err =>{
+		console.log("Error from coindcx");
 		console.log(err);
 	});
 

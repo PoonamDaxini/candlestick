@@ -56,26 +56,46 @@
 			chart.render();
         }});
 	}
-window.onload = function () {
-	getchart('SNTETH',1, 1585491658);
+$(function () {
+	$.ajax({
+        url: 'http://localhost:7004/coindcx/getMarketDetails',
+        success: function(response) {
+			const array = response.data;
+			if (array != '')
+			{
 
-  $(".submit_button").on('click',function() {
-  	const market = $('#market').val();
-  	const stick = $('#stick').val();
-  	const startTime = $('#startTime').val();
-  	const endTime = $('#endTime').val();
-  	getchart(market, stick, startTime, endTime);
-  });
+				for (i in array) { 
+				    $("#market").append("<option value='"+array[i].symbol+"''>"+array[i].symbol+"</option>");
+				}
+				getchart(array[0].symbol,1);
+
+			}
+
+        },
+        error: function(x, e) {
+
+        }
+
+    });
+
+
+
+	$(".submit_button").on('click',function() {
+		const market = $('#market').val();
+		const stick = $('#stick').val();
+		const startTime = $('#startTime').val();
+		const endTime = $('#endTime').val();
+		// getchart(market, stick, startTime, endTime);
+		return false;
+	});
 	
-}
+});
 </script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 	<form>
 		<select name = "market" id="market">
-			<option value="BTCUSDT"> BTCUSDT </option>
-			<option value="SNTETH"> SNTETH </option>
 		</select>
 		<select name="stick" id="stick">
 			<option value=1>1m</option>

@@ -68,7 +68,7 @@ app.use(async (ctx, next) => {
 });
 
 require('./app/router')(app);
-// require('./app/tradeInfo');
+require('./app/tradeinfo');
 
 console.log("here...starting server listning at "+ config.PORT);
 app.listen(config.PORT || 7005);

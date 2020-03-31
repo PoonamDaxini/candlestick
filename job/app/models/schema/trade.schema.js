@@ -7,6 +7,7 @@ const tradeSchema = mongoose.Schema({
 	high: {type:Number},
 	low: {type:Number},
 	volume: {type:Number},
+	last_price: {type:Number},
 	close: {type:Number},
 	open: {type:Number},
 	bid: {type:Number},

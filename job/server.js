@@ -68,7 +68,7 @@ app.use(async (ctx, next) => {
 });
 
 require('./app/router')(app);
-require('./app/tradeInfo');
+// require('./app/tradeInfo');
 
 app.listen(config.PORT || 7005);
 
