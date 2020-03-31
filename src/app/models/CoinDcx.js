@@ -63,10 +63,11 @@ class CoinDcx {
 				
 			// });
 	}
+
 	async setOneMinuteRedisKey(trade) {
 		const current_time = moment().format('X');
 		const prev_time = moment().subtract(60, 'seconds').format('X'); //1 min
-		const min_time = moment().format('YYYY_mm_D_hh_mm');
+		const min_time = moment().format('YYYY_MM_DD_hh_mm');
 
 		console.log(prev_time, current_time, min_time);
 		const redKey = await cache.get(cache.keys.CHART_DETAILS, {stickType: config.stickType['one_minute'], timestamp: trade.timestamp, market: trade.market});
@@ -88,7 +89,6 @@ class CoinDcx {
 			       }
 			    }
 			   ]).then(res => {
-			   	console.log(res);
 			   		for(let marketData of res) {
 						cache.set(cache.keys.CHART_DETAILS, {
 							stickType: config.stickType['one_minute'],
@@ -96,6 +96,8 @@ class CoinDcx {
 							market: marketData.market
 						}, marketData);
 					}
+			   }).catch(err => {
+			   		console.log(err);
 			   });
 			}
 	}
