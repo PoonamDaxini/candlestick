@@ -3,15 +3,12 @@
 const mongoose = require('mongoose');
 const tradeSchema = mongoose.Schema({
 	market : {type:String},
-	change_24_hour : {type:Number},
 	high: {type:Number},
 	low: {type:Number},
 	volume: {type:Number},
 	last_price: {type:Number},
 	close: {type:Number},
 	open: {type:Number},
-	bid: {type:Number},
-	ask: {type:Number},
 	timestamp: {type:Number},
 	trade_timestamp: {type:String}
 });

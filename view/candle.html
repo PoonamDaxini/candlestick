@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 		<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./bootstrap.min.css">
 		
 		<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script src="./jquery-2.1.1.min.js" type="text/javascript"></script>
 	
 <script type="text/javascript">
 	function getchart(market, stick, startTime = '', endTime=''){
@@ -38,7 +38,7 @@
 					//	labelFormatter: function (e) {
 					//		return CanvasJS.formatDate( e.value, "DD mm");
 					//	},
-						//interval:2,
+						interval:1,
 					//	intervalType: "minute",
 						valueFormatString: "MM-DD hh:mm",
 						labelAngle: -45
@@ -56,40 +56,42 @@
 			chart.render();
         }});
 	}
-$(function () {
-	$.ajax({
-        url: 'http://localhost:7004/coindcx/getMarketDetails',
-        success: function(response) {
-			const array = response.data;
-			if (array != '')
-			{
 
-				for (i in array) { 
-				    $("#market").append("<option value='"+array[i].symbol+"''>"+array[i].symbol+"</option>");
-				}
-				getchart(array[0].symbol,1);
-
-			}
-
-        },
-        error: function(x, e) {
-
-        }
-
-    });
-
-
-
-	$(".submit_button").on('click',function() {
-		const market = $('#market').val();
-		const stick = $('#stick').val();
-		const startTime = $('#startTime').val();
-		const endTime = $('#endTime').val();
-		// getchart(market, stick, startTime, endTime);
-		return false;
-	});
 	
-});
+	$(function () {
+		$.ajax({
+	        url: 'http://localhost:7004/coindcx/getMarketDetails',
+	        success: function(response) {
+				const array = response.data;
+				if (array != '')
+				{
+
+					for (i in array) { 
+					    $("#market").append("<option value='"+array[i].symbol+"''>"+array[i].symbol+"</option>");
+					}
+					getchart(array[0].symbol,1);
+
+				}
+
+	        },
+	        error: function(x, e) {
+
+	        }
+
+	    });
+
+
+
+		$(".submit_button").on('click',function() {
+			const market = $('#market').val();
+			const stick = $('#stick').val();
+			const startTime = $('#startTime').val();
+			const endTime = $('#endTime').val();
+			getchart(market, stick, startTime, endTime);
+			return false;
+		});
+		
+	});
 </script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>

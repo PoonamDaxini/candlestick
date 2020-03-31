@@ -4,12 +4,17 @@ const TradeRawCollection = require('./schema/traderaw.schema.js');
 
 class CoinDcx {
 
+	async getDataRedis(market, starttime, endtime, stick=1) {
+		// TODO: Fetch data from redis based on range given and return it
+		// Fallback should be from mongo
+	}
+
 	async getData(market, starttime, endtime, stick=1) {
-//divide time in chunks of stick(in minutes)
+		//divide time in chunks of stick(in minutes)
 		let start = moment(starttime*1000).format('X');
 		let slices = {};
 		let count = 0;
-
+		console.log(start, endtime);
 		while (endtime >= start) {
 		    
 		    start = moment(start*1000).add(stick*60, 'seconds').format('X');

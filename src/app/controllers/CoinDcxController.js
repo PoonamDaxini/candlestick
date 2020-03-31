@@ -23,11 +23,12 @@ exports.getChartDetails = async(ctx) => {
 	const query = ctx.query;
 	if(query.market) { 
 		//stick in minutes, for hr stick = 60
-		
+
 		const stick = query.stick || 1;
 		const endTime = query.endTime || moment().format('X');
-		const startTime = query.startTime || moment(endTime).subtract(stick*60, 'minutes').format('X');
+		const startTime = query.startTime || moment(endTime*1000).subtract(stick*60, 'minutes').format('X');
 
+		// ctx.body = await CoinDcx.getDataRedis(query.market, startTime, endTime, stick);
 		ctx.body = await CoinDcx.getData(query.market, startTime, endTime, stick);
 	}else{
 		ctx.body = "Market is required";

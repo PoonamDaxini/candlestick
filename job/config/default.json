@@ -22,9 +22,9 @@
     	"one_hour": 60
     },
     "expireStickType": {
-    	"one_minute": 15,
-    	"fifteen_minute": 60,
-    	"one_hour": 720
+    	"one_minute": 86400,
+    	"fifteen_minute": 86400,
+    	"one_hour": 86400
     },
 	"rabbitMQ":{		
         "host": "127.0.0.1",

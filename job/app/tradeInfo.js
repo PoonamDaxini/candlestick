@@ -1,8 +1,47 @@
 const request = require('superagent');
 
-// const TradeCollection = require('./models/schema/trade.schema.js');
+const TradeCollection = require('./models/schema/trade.schema.js');
 
 
+async function test() {
+
+let trade ={};
+let trade_timestamp_in_hr = '2020_03_31_08'
+			console.log(trade.market, trade_timestamp_in_hr+'_00',  trade_timestamp_in_hr+'_59');
+trade.market="GVTBTC"
+await TradeCollection.aggregate([
+		   	{
+		   		$match: {market: trade.market, trade_timestamp: {$gte: (trade_timestamp_in_hr).toString()+'_00', $lte: (trade_timestamp_in_hr).toString()+'_59'}}
+		   	},
+		    {
+		       $group:
+		         {
+		           _id: "$market",
+		           high: { $max: "$high" },
+		           low: { $min: "$low" },
+		           open: {$first: "$last_price"},
+		           close: {$last: "$last_price"}
+
+		       }
+		    }
+		   ]).then(res => {
+		   		console.log("damm....it");
+		   		console.log(res);	
+			   	if(res.length){
+				   	trade = res[0];
+			   	}else{
+			   		trade.open = trade.last_price;
+					trade.close = trade.last_price;
+
+			   	}
+				
+		   }).catch(err => {
+		   		console.log("if error yar...");
+		   		console.log(err);
+		   });
+		   console.log("here..................");
+}
+test();
 // setInterval(async () => { 
 // 	await request.get(config.host+":"+config.PORT+'/coindcx/')
 	

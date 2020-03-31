@@ -15,7 +15,7 @@ class CoinDcx {
 			console.log(err);
 		});
 
-		//TO DO: (in progress) Start Logic to store data in redis with minute wise candle data while fetching data
+		//TO DO: (in progress) Start Logic to store data in redis with minute, fifteen minute and hourly trade data while fetching 
 		
 
 		//Store data in mongo
@@ -109,14 +109,42 @@ class CoinDcx {
 			trade.low = redKey.low > trade.low ? redKey.low : trade.low;
 			trade.close = redKey.close > trade.last_price ? redKey.close : trade.last_price;
 			trade.open = redKey.open;
+			
+			await cache.set(cache.keys.CHART_DETAILS, {stickType: config.stickType['one_hour'], timestamp: trade_timestamp_in_hr, market: trade.market}, JSON.stringify(trade), config.expireStickType['one_hour'] * 60);
 
 		} else {
 			//new or miss key
-			trade.open = trade.last_price;
-			trade.close = trade.last_price;
+			// trade = await TradeCollection.aggregate([
+		 //   	{
+		 //   		$match: {market: trade.market, trade_timestamp: {$gte: (trade_timestamp_in_hr).toString()+'_00', $lte: (trade_timestamp_in_hr).toString()+'_59'}}
+		 //   	},
+		 //    {
+		 //       $group:
+		 //         {
+		 //           _id: "$market",
+		 //           high: { $max: "$high" },
+		 //           low: { $min: "$low" },
+		 //           open: {$first: "$last_price"},
+		 //           close: {$last: "$last_price"}
+
+		 //       }
+		 //    }
+		 //   ]).then(res => {
+			//    	if(res.length){
+			// 	   	trade = res[0];
+			//    	}else{
+			   		trade.open = trade.last_price;
+					trade.close = trade.last_price;
+
+			  //  	}
+			  //  	return trade;
+				
+		   // }).catch(err => {
+		   // 		console.log(err);
+		   // });
+			await cache.set(cache.keys.CHART_DETAILS, {stickType: config.stickType['one_hour'], timestamp: trade_timestamp_in_hr, market: trade.market}, JSON.stringify(trade), config.expireStickType['one_hour'] * 60);
+
 		}
-		
-		await cache.set(cache.keys.CHART_DETAILS, {stickType: config.stickType['one_hour'], timestamp: trade_timestamp_in_hr, market: trade.market}, JSON.stringify(trade), config.expireStickType['one_hour'] * 60);
 
 	}
 
@@ -146,6 +174,8 @@ class CoinDcx {
 
 		} else {
 			//new or miss key
+
+			//get aggregate data from mongo and set it in redis
 
 			trade.open = trade.last_price;
 			trade.close = trade.last_price;
