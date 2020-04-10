@@ -25,7 +25,7 @@
     	"one_minute": 86400,
     	"fifteen_minute": 86400,
     	"one_hour": 86400
-    }
+    },
     "coindcxBaseURL": "https://api.coindcx.com",
     "coindcxTradeURL": "/exchange/ticker",
     "coindcxMarketDetailsURL": "/exchange/v1/markets_details",
